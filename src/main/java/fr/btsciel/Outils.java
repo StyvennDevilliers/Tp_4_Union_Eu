@@ -1,14 +1,11 @@
 package fr.btsciel;
 
-import clavier.In;
-
 public class Outils {
-    private static Pays [] pays = new Pays[26];
 
-    public static void menu(int menu) {
+    public static Pays[] menu(int menu, Pays [] pays) {
         switch (menu) {
             case 1:
-                Pays.sortNomCroissant(Ihm.pays(pays));
+                return Pays.sortNomCroissant(pays);
             case 2:
 
             case 3:
@@ -18,5 +15,6 @@ public class Outils {
             case 5:
 
         }
+        return null;
     }
 }

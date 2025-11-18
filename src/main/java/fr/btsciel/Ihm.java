@@ -4,8 +4,11 @@ import clavier.In;
 
 public class Ihm {
     public static void main(String[] args) {
-
         int menu;
+        Pays [] pays = new Pays[27];
+        for (Pays p : pays(pays)) {
+            System.out.println(p.getNom());
+        }
         System.out.println("""
                 1 pour lister les pays par ordre croissant du nom
                 2 pour lister les pays par ordre croissant de la capitale
@@ -14,12 +17,14 @@ public class Ihm {
                 5 pour lister les pays par ordre croissant de la densité
                 """);
         menu = In.readInteger();
-        Outils.menu(menu);
-
+        System.out.println(Outils.menu(menu,pays(pays)));
+        for (Pays p : pays(pays)) {
+            System.out.println(p.getNom());
+        }
     }
 
     public static Pays[] pays(Pays [] pays) {
-        pays[0] = new Pays(357569000,83445000,"Berlin","Allemagne");
+        pays[26] = new Pays(357569000,83445000,"Berlin","Allemagne");
         pays[1] = new Pays(83882000,9158750,"Vienne","Autriche");
         pays[2] = new Pays(30667000,11832049,"Bruxelles","Belgique");
         pays[3] = new Pays(110996000,6445481,"Sofia","Bulgarie");
@@ -45,7 +50,7 @@ public class Ihm {
         pays[23] = new Pays(49035000,5424687,"Bratislava","Slovaquie");
         pays[24] = new Pays(20273000,2123949,"Ljubljana","Slovenie");
         pays[25] = new Pays(447424000,10551707,"Stockholm","Suede");
-        pays[26] = new Pays(78871000,10900555,"Prague","Tchequie");
+        pays[0] = new Pays(78871000,10900555,"Prague","Tchequie");
         return pays;
     }
 
