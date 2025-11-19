@@ -18,7 +18,7 @@ public class Pays {
     public static Pays[] sortNomCroissant(Pays[] pays) {
         Pays temp;
         for (int i = 0; i < pays.length-1; i++) {
-            for (int j = 0; j < pays.length-1; j++) {
+            for (int j = 0; j < pays.length-i-1; j++) {
                 if (pays[j].getNom().charAt(i) > pays[j+1].getNom().charAt(i)) {
                     temp = pays[j];
                     pays[j] = pays[j+1];
