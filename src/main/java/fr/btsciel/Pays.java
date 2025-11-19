@@ -1,52 +1,45 @@
 package fr.btsciel;
 
 public class Pays {
-    private String nom;
-    private String capitale;
-    private int nombreHabitant;
-    private double superficie;
-    private double densite;
+    private static String nom;
+    private static String capitale;
+    private static int nombreHabitant;
+    private static int superficie;
+    private static double densite;
+    private static int anneeAdhesions;
 
-    public Pays(double superficie, int nombreHabitant, String capitale, String nom) {
-        this.densite = nombreHabitant/superficie;
+    public Pays(int superficie, int nombreHabitant, String capitale, String nom, int anneeAdhesions) {
+        this.anneeAdhesions = anneeAdhesions;
+        this.densite = (double) nombreHabitant / superficie;
         this.superficie = superficie;
         this.nombreHabitant = nombreHabitant;
         this.capitale = capitale;
         this.nom = nom;
     }
 
-    public static Pays[] sortNomCroissant(Pays[] pays) {
-        Pays temp;
-        for (int i = 0; i < pays.length-1; i++) {
-            for (int j = 0; j < pays.length-i-1; j++) {
-                if (pays[j].getNom().charAt(i) > pays[j+1].getNom().charAt(i)) {
-                    temp = pays[j];
-                    pays[j] = pays[j+1];
-                    pays[j+1] = temp;
-                }
-            }
-        }
-        return pays;
+    public static int getAnneeAdhesions() {
+        return anneeAdhesions;
     }
 
     public String getNom() {
         return nom;
     }
 
-
     public String getCapitale() {
         return capitale;
     }
 
-    public int getNombreHabitant() {
+    public static int getNombreHabitant() {
         return nombreHabitant;
     }
 
-    public double getSuperficie() {
+
+    public static int getSuperficie() {
         return superficie;
     }
 
-    public double getDensite() {
+    public static double getDensite() {
         return densite;
     }
 }
+
