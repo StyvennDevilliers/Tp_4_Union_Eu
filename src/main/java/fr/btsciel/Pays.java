@@ -1,12 +1,12 @@
 package fr.btsciel;
 
 public class Pays {
-    private static String nom;
-    private static String capitale;
-    private static int nombreHabitant;
-    private static int superficie;
-    private static double densite;
-    private static int anneeAdhesions;
+    private  String nom;
+    private  String capitale;
+    private  int nombreHabitant;
+    private  int superficie;
+    private  double densite;
+    private  int anneeAdhesions;
 
     public Pays(int superficie, int nombreHabitant, String capitale, String nom, int anneeAdhesions) {
         this.anneeAdhesions = anneeAdhesions;
@@ -17,7 +17,7 @@ public class Pays {
         this.nom = nom;
     }
 
-    public static int getAnneeAdhesions() {
+    public int getAnneeAdhesions() {
         return anneeAdhesions;
     }
 
@@ -29,16 +29,16 @@ public class Pays {
         return capitale;
     }
 
-    public static int getNombreHabitant() {
+    public int getNombreHabitant() {
         return nombreHabitant;
     }
 
 
-    public static int getSuperficie() {
+    public int getSuperficie() {
         return superficie;
     }
 
-    public static double getDensite() {
+    public double getDensite() {
         return densite;
     }
 }

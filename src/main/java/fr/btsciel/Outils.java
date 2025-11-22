@@ -1,5 +1,7 @@
 package fr.btsciel;
 
+import clavier.In;
+
 import java.text.DecimalFormat;
 
 public class Outils {
@@ -15,21 +17,52 @@ public class Outils {
      * @param pays Tableau de type Pays que on recupere
      */
     public static String menu(int menu, Pays [] pays) {
+        String options;
         switch (menu) {
             case 1:
-                sortNomCroissant(pays);
+                System.out.println("Voulez-vous trier par ordre croissant ou décroissant ?");
+                options = In.readString().replaceAll(" ","").toLowerCase();
+                if (options.equals("croissant")){
+                    sortNomCroissant(pays);
+                }else{
+                    sortNomDecroissant(pays);
+                }
                 break;
             case 2:
-                sortCapitalCroissant(pays);
+                System.out.println("Voulez-vous trier par ordre croissant ou décroissant ?");
+                options = In.readString().replaceAll(" ","").toLowerCase();
+                if (options.equals("croissant")){
+                    sortCapitalCroissant(pays);
+                }else {
+                    sortCapitalDecroissant(pays);
+                }
                 break;
             case 3:
-                sortNombreHabitantCroissant(pays);
+                System.out.println("Voulez-vous trier par ordre croissant ou décroissant ?");
+                options = In.readString().replaceAll(" ","").toLowerCase();
+                if (options.equals("croissant")){
+                    sortNombreHabitantCroissant(pays);
+                }else {
+                    sortNombreHabitantDecroissant(pays);
+                }
                 break;
             case 4:
-                sortSuperficieCroissant(pays);
+                System.out.println("Voulez-vous trier par ordre croissant ou décroissant ?");
+                options = In.readString().replaceAll(" ","").toLowerCase();
+                if (options.equals("croissant")){
+                    sortSuperficieCroissant(pays);
+                }else {
+                    sortSuperficieDecroissant(pays);
+                }
                 break;
             case 5:
-                sortDencite(pays);
+                System.out.println("Voulez-vous trier par ordre croissant ou décroissant ?");
+                options = In.readString().replaceAll(" ","").toLowerCase();
+                if (options.equals("croissant")){
+                    sortDenciteCroissant(pays);
+                }else {
+                    sortDenciteDecroissant(pays);
+                }
                 break;
             case 6:
                 return getPaysPlusPeuple(pays);
@@ -42,7 +75,13 @@ public class Outils {
             case 10:
                 return getDensiteTotal(pays);
             case 11:
-                sortAdhesionsAnneeCroissante(pays);
+                System.out.println("Voulez-vous trier par ordre croissant ou décroissant ?");
+                options = In.readString().replaceAll(" ","").toLowerCase();
+                if (options.equals("croissant")){
+                    sortAdhesionsAnneeCroissante(pays);
+                }else {
+                    sortAdhesionsAnneeDecroissante(pays);
+                }
                 break;
         }
         return null;
@@ -54,7 +93,7 @@ public class Outils {
      * @param menu Valeur pour choisir l'action à faire dans le menu
      * @param pays Tableau de type Pays d'ou on recupere la densite et les noms
      */
-    public static void affichageDensiteCroissant(int menu, Pays [] pays){
+    public static void affichageDensite(int menu, Pays [] pays){
         Outils.menu(menu,pays);
         for (Pays p : pays) {
             System.out.print(df4.format(p.getDensite()) + " Habitant/km^2\t");
@@ -67,7 +106,7 @@ public class Outils {
      *
      * @param pays Tableau de type Pays d'ou on recupere les noms
      */
-    public static void affichageNomCroissant(int menu,Pays [] pays) {
+    public static void affichageNom(int menu, Pays [] pays) {
         Outils.menu(menu,pays);
         for (Pays p : pays) {
             System.out.println(p.getNom());
@@ -79,7 +118,7 @@ public class Outils {
      *
      * @param pays Tableau de type Pays d'ou on recupere la capitale et les noms
      */
-    public static void affichageCapitaleCroissant(int menu,Pays [] pays) {
+    public static void affichageCapitale(int menu, Pays [] pays) {
         Outils.menu(menu,pays);
         for (Pays p : pays) {
             System.out.print(p.getCapitale() + "\t");
@@ -92,7 +131,7 @@ public class Outils {
      *
      * @param pays Tableau de type Pays d'ou on recupere la supercifie et les noms
      */
-    public static void affichageSuperficieCroissant(int menu,Pays [] pays){
+    public static void affichageSuperficie(int menu, Pays [] pays){
         Outils.menu(menu,pays);
         for (Pays p : pays) {
             System.out.print(df3.format(p.getSuperficie()) + " km^2\t");
@@ -105,7 +144,7 @@ public class Outils {
      *
      * @param pays Tableau de type Pays d'ou on recupere le nombre d'habitant et les noms
      */
-    public static void affichageNombreHabitantCroissant(int menu,Pays [] pays){
+    public static void affichageNombreHabitant(int menu, Pays [] pays){
         Outils.menu(menu,pays);
         for (Pays p : pays) {
             System.out.print(df2.format(p.getNombreHabitant()) + "\t");
@@ -161,7 +200,7 @@ public class Outils {
      * @return densiteTotal Valeur de la densité total
      */
     private static String getDensiteTotal(Pays[] pays) {
-        double densiteTotal = getNombreHabitantTotal(pays)/getSuperficieTotal(pays);
+        double densiteTotal = (double) getNombreHabitantTotal(pays) /getSuperficieTotal(pays);
         return df.format(densiteTotal);
     }
 
@@ -173,8 +212,8 @@ public class Outils {
      */
     private static int getNombreHabitantTotal(Pays[] pays) {
         int habitantTotal = 0;
-        for (int i = 0; i < pays.length; i++) {
-            habitantTotal += pays[i].getNombreHabitant();
+        for (Pays pay : pays) {
+            habitantTotal += pay.getNombreHabitant();
         }
         return habitantTotal;
     }
@@ -187,8 +226,8 @@ public class Outils {
      */
     private static int getSuperficieTotal(Pays[] pays) {
         int superficieTotal = 0;
-        for (int i = 0; i < pays.length; i++) {
-            superficieTotal += pays[i].getSuperficie();
+        for (Pays pay : pays) {
+            superficieTotal += pay.getSuperficie();
         }
         return superficieTotal;
     }
@@ -197,32 +236,49 @@ public class Outils {
      * Methode permettant le recuperer le pays appartenant a l'UE ayant la superficie la plus élévé graçe a un tableau
      *
      * @param pays Tableau de type Pays d'ou on recupere la supercifie
-     * @return nomPays Chaine de caractère contenant le nom du pays
+     * @return Chaine de caractère contenant le nom du pays
      */
     private static String getPaysPlusSuperficie(Pays[] pays) {
         sortSuperficieCroissant(pays);
-        String nomPays = pays[0].getNom();
-        return nomPays;
+        return pays[0].getNom();
     }
 
     /**
      * Methode permettant le recuperer le pays appartenant a l'UE ayant le nombre d'habitants le plus élévé graçe a un tableau
      *
      * @param pays Tableau de type Pays d'ou on recupere la supercifie
-     * @return nomPays Chaine de caractère contenant le nom du pays
+     * @return Chaine de caractère contenant le nom du pays
      */
     private static String getPaysPlusPeuple(Pays[] pays) {
         sortNombreHabitantCroissant(pays);
-        String nomPays = pays[0].getNom();
-        return nomPays;
+        return pays[0].getNom();
     }
 
     /**
-     * Methode permettant de trier les pays appartenant a l'UE par leur année d'adhésion graçe a un tableau
+     * Methode permettant de trier par ordre croissant les pays appartenant a l'UE par leur année d'adhésion graçe a un tableau
      *
      * @param pays Tableau de type Pays d'ou on recupere la supercifie
      */
     private static void sortAdhesionsAnneeCroissante(Pays[] pays) {
+        for (int i = 0; i < pays.length - 1; i++) {
+            for (int j = 0; j < pays.length - i - 1; j++) {
+                int anneeAdhesion1 = pays[j].getAnneeAdhesions();
+                int anneeAdhesion2 = pays[j + 1].getAnneeAdhesions();
+                if (anneeAdhesion1 > anneeAdhesion2) {
+                    Pays temp = pays[j];
+                    pays[j] = pays[j + 1];
+                    pays[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    /**
+     * Methode permettant de trier par ordre décroissant les pays appartenant a l'UE par leur année d'adhésion graçe a un tableau
+     *
+     * @param pays Tableau de type Pays d'ou on recupere la supercifie
+     */
+    private static void sortAdhesionsAnneeDecroissante(Pays[] pays) {
         for (int i = 0; i < pays.length - 1; i++) {
             for (int j = 0; j < pays.length - i - 1; j++) {
                 int anneeAdhesion1 = pays[j].getAnneeAdhesions();
@@ -237,11 +293,30 @@ public class Outils {
     }
 
     /**
-     * Methode permettant de trier les pays appartenant a l'UE par leur dencité graçe a un tableau
+     * Methode permettant de trier par ordre croissant les pays appartenant a l'UE par leur dencité graçe a un tableau
      *
      * @param pays Tableau de type Pays d'ou on recupere la supercifie
      */
-    private static void sortDencite(Pays[] pays) {
+    private static void sortDenciteCroissant(Pays[] pays) {
+        for (int i = 0; i < pays.length - 1; i++) {
+            for (int j = 0; j < pays.length - i - 1; j++) {
+                double dencite1 = pays[j].getDensite();
+                double dencite2 = pays[j + 1].getDensite();
+                if (dencite1 > dencite2) {
+                    Pays temp = pays[j];
+                    pays[j] = pays[j + 1];
+                    pays[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    /**
+     * Methode permettant de trier par ordre décroissant les pays appartenant a l'UE par leur dencité graçe a un tableau
+     *
+     * @param pays Tableau de type Pays d'ou on recupere la supercifie
+     */
+    private static void sortDenciteDecroissant(Pays[] pays) {
         for (int i = 0; i < pays.length - 1; i++) {
             for (int j = 0; j < pays.length - i - 1; j++) {
                 double dencite1 = pays[j].getDensite();
@@ -256,11 +331,30 @@ public class Outils {
     }
 
     /**
-     * Methode permettant de trier les pays appartenant a l'UE par leur superficie graçe a un tableau
+     * Methode permettant de trier  par ordre croissant les pays appartenant a l'UE par leur superficie graçe a un tableau
      *
      * @param pays Tableau de type Pays d'ou on recupere la supercifie
      */
     private static void sortSuperficieCroissant(Pays[] pays) {
+        for (int i = 0; i < pays.length - 1; i++) {
+            for (int j = 0; j < pays.length - i - 1; j++) {
+                double superficie1 = pays[j].getSuperficie();
+                double superficie2 = pays[j + 1].getSuperficie();
+                if (superficie1 > superficie2) {
+                    Pays temp = pays[j];
+                    pays[j] = pays[j + 1];
+                    pays[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    /**
+     * Methode permettant de trier par ordre décroissant les pays appartenant a l'UE par leur superficie graçe a un tableau
+     *
+     * @param pays Tableau de type Pays d'ou on recupere la supercifie
+     */
+    private static void sortSuperficieDecroissant(Pays[] pays) {
         for (int i = 0; i < pays.length - 1; i++) {
             for (int j = 0; j < pays.length - i - 1; j++) {
                 double superficie1 = pays[j].getSuperficie();
@@ -275,7 +369,7 @@ public class Outils {
     }
 
     /**
-     * Methode permettant de trier les pays appartenant a l'UE par leur nombre d'habitant graçe a un tableau
+     * Methode permettant de trier par ordre croissant les pays appartenant a l'UE par leur nombre d'habitant graçe a un tableau
      *
      * @param pays Tableau de type Pays d'ou on recupere la supercifie
      */
@@ -294,7 +388,45 @@ public class Outils {
     }
 
     /**
-     * Methode permettant de trier les pays appartenant a l'UE par leur nom graçe a un tableau
+     * Methode permettant de trier par ordre décroissant les pays appartenant a l'UE par leur nombre d'habitant graçe a un tableau
+     *
+     * @param pays Tableau de type Pays d'ou on recupere la supercifie
+     */
+    private static void sortNombreHabitantDecroissant(Pays[] pays) {
+        for (int i = 0; i < pays.length - 1; i++) {
+            for (int j = 0; j < pays.length - i - 1; j++) {
+                int nombre1 = pays[j].getNombreHabitant();
+                int nombre2 = pays[j + 1].getNombreHabitant();
+                if (nombre1 < nombre2) {
+                    Pays temp = pays[j];
+                    pays[j] = pays[j + 1];
+                    pays[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    /**
+     * Methode permettant de trier par ordre décroissant les pays appartenant a l'UE par leur nom graçe a un tableau
+     *
+     * @param pays Tableau de type Pays d'ou on recupere la supercifie
+     */
+    private static void sortNomDecroissant(Pays[] pays) {
+        for (int i = 0; i < pays.length - 1; i++) {
+            for (int j = 0; j < pays.length - i - 1; j++) {
+                String nom1 = pays[j].getNom();
+                String nom2 = pays[j + 1].getNom();
+                if (nom1.compareTo(nom2) < 0) {
+                    Pays temp = pays[j];
+                    pays[j] = pays[j + 1];
+                    pays[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    /**
+     * Methode permettant de trier par ordre croissant les pays appartenant a l'UE par leur nom graçe a un tableau
      *
      * @param pays Tableau de type Pays d'ou on recupere la supercifie
      */
@@ -313,7 +445,7 @@ public class Outils {
     }
 
     /**
-     * Methode permettant de trier les pays appartenant a l'UE par leur capital graçe a un tableau
+     * Methode permettant de trier par ordre croissant les pays appartenant a l'UE par leur capital graçe a un tableau
      *
      * @param pays Tableau de type Pays d'ou on recupere la supercifie
      */
@@ -323,6 +455,25 @@ public class Outils {
                 String capitale1 = pays[j].getCapitale();
                 String capitale2 = pays[j + 1].getCapitale();
                 if (capitale1.compareTo(capitale2) > 0) {
+                    Pays temp = pays[j];
+                    pays[j] = pays[j + 1];
+                    pays[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    /**
+     * Methode permettant de trier par ordre décroissant les pays appartenant a l'UE par leur capital graçe a un tableau
+     *
+     * @param pays Tableau de type Pays d'ou on recupere la supercifie
+     */
+    private static void sortCapitalDecroissant(Pays[] pays) {
+        for (int i = 0; i < pays.length - 1; i++) {
+            for (int j = 0; j < pays.length - i - 1; j++) {
+                String capitale1 = pays[j].getCapitale();
+                String capitale2 = pays[j + 1].getCapitale();
+                if (capitale1.compareTo(capitale2) < 0) {
                     Pays temp = pays[j];
                     pays[j] = pays[j + 1];
                     pays[j + 1] = temp;
